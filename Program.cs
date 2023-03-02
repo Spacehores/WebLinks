@@ -20,12 +20,12 @@ namespace WebLinks
         }
         static void Main(string[] args)
         {
+            webLinks = new WebLink[0];
             string[] lines = System.IO.File.ReadAllLines(@"links.txt");
-            webLinks = new WebLink[lines.Length];
             for (int i = 0; i<lines.Length; i++)
             {
                 string[] words = lines[i].Split('|');
-                webLinks[i] = new WebLink(words[0], words[1], words[2]);
+                addWebLink(words[0], words[1], words[2]);
             }
 
             PrintWelcome();
@@ -64,7 +64,23 @@ namespace WebLinks
             string description = Console.ReadLine();
             Console.Write($"enter URL: ");
             string url = Console.ReadLine();
+            addWebLink(title, description, url);
+            Console.WriteLine($"Done adding new weblink");
         }
+
+        private static void addWebLink(string title, string description, string url)
+        {
+            WebLink newWebLink = new WebLink(title, description, url);
+
+            WebLink[] newList = new WebLink[webLinks.Length+1];
+
+            for (int i = 0; i< webLinks.Length; i++)
+            {
+                newList[i] = webLinks[i];
+            }
+            newList[newList.Length-1] = newWebLink;
+        }
+
         private static void NotYetImplemented(string command)
         {
             Console.WriteLine($"Sorry: '{command}' is not yet implemented");
