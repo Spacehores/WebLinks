@@ -1,0 +1,2 @@
+Google|Bra sökmotor|http://www.google.se
+SVT|Sveriges Television|https://www.svt.se/
