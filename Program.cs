@@ -1,31 +1,43 @@
-﻿using static System.Net.Mime.MediaTypeNames;
+﻿using System;
+using System.Diagnostics;
+using System.Net;
+using System.Numerics;
+using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
-namespace WebLinks
+namespace WebLinks_kopia
 {
     internal class Program
     {
-        private static WebLink[] webLinks;
-        class WebLink
-        {
-            public string title;
-            public string url;
-            public string description;
 
-        public WebLink(string title, string description, string url)
+        static WebLink[] webLinks = new WebLink[99]; //Array av WebLink, kan lagra max 99 länkadresser 
+
+        class WebLink //Klass WebLink, enligt uppgift
+        {
+            string title, url, description;
+        public WebLink(string title, string description, string url) //Klass WebLink, standard konstruktor
             {
                 this.title = title;
                 this.url = url;
                 this.description = description;
             }
+            public void Print() //Klass WebLink, printfunktion
+            {
+                Console.WriteLine($"Name: {title}");
+                Console.WriteLine($"Url: {url}");
+                Console.WriteLine($"Description: {description}");
+            }
         }
-        static void Main(string[] args)
+     
+        
+        public static void Main(string[] args)
         {
-            webLinks = new WebLink[0];
-            string[] lines = System.IO.File.ReadAllLines(@"links.txt");
-            for (int i = 0; i<lines.Length; i++)
+            string[] lines = File.ReadAllLines(@"links.txt"); 
+            for (int i = 0; i<lines.Length; i++)                //Upggift 1 laddar weblänkar från en fil till en array webLinks
             {
                 string[] words = lines[i].Split('|');
-                addWebLink(words[0], words[1], words[2]);
+                WebLink temp = new WebLink(words[0], words[1], words[2]);   
+                webLinks[i] = temp;
             }
 
             PrintWelcome();
@@ -34,57 +46,44 @@ namespace WebLinks
             {
                 Console.Write(": ");
                 command = Console.ReadLine();
-                if (command == "quit")
+                if (command == "q")
                 {
                     Console.WriteLine("Good bye!");
+                }
+                else if (command == "list")
+                {
+                    WriteTheList();
                 }
                 else if (command == "help")
                 {
                     WriteTheHelp();
                 }
-                else if (command == "load")
+                else if (command == "add")
                 {
-                    loadNewWebLink();
+                    AddTheList();
                 }
                 else if (command == "open")
                 {
-                    NotYetImplemented(command);
+                    openNewWebLink();
                 }
                 else
                 {
                     Console.WriteLine($"Unknown command '{command}'");
                 }
-            } while (command != "quit");
+            } while (command != "q");
         }
-        private static void loadNewWebLink()
+
+        static void openNewWebLink()
         {
-            Console.Write($"enter title: ");
-            string title = Console.ReadLine();
-            Console.Write($"enter description: ");
-            string description = Console.ReadLine();
             Console.Write($"enter URL: ");
             string url = Console.ReadLine();
-            addWebLink(title, description, url);
-            Console.WriteLine($"Done adding new weblink");
+            Process proc = new Process();
+            proc.StartInfo.UseShellExecute = true;
+            string open = "https://" + url;
+            proc.StartInfo.FileName = open;
+            proc.Start();
         }
 
-        private static void addWebLink(string title, string description, string url)
-        {
-            WebLink newWebLink = new WebLink(title, description, url);
-
-            WebLink[] newList = new WebLink[webLinks.Length+1];
-
-            for (int i = 0; i< webLinks.Length; i++)
-            {
-                newList[i] = webLinks[i];
-            }
-            newList[newList.Length-1] = newWebLink;
-        }
-
-        private static void NotYetImplemented(string command)
-        {
-            Console.WriteLine($"Sorry: '{command}' is not yet implemented");
-        }
 
         private static void PrintWelcome()
         {
@@ -93,13 +92,51 @@ namespace WebLinks
             Console.WriteLine("Write 'help' for help!");
         }
 
+        private static void WriteTheList()
+        {
+            int i = 0;
+            while (webLinks[i] != null) {
+                webLinks[i].Print();
+                i++; }
+            Console.Write($"If you want to open a link from the list write the Name:");
+            string title = Console.ReadLine();
+            string[] lines = File.ReadAllLines(@"links.txt");
+            for (int j = 0; j < lines.Length; j++)
+            {
+                string[] words = lines[j].Split('|');
+                if (words[0] == title) {
+                    Process proc = new Process();
+                    proc.StartInfo.UseShellExecute = true;
+                    string open = words[2];
+                    proc.StartInfo.FileName = open;
+                    proc.Start();
+                }
+            }
+        }
+
+        private static void AddTheList()
+        {
+            Console.Write($"enter title: ");
+            string title = Console.ReadLine();
+            Console.Write($"enter description: ");
+            string description = Console.ReadLine();
+            Console.Write($"enter URL: ");
+            string url = Console.ReadLine();
+
+            StreamWriter utfil = new StreamWriter(@"links.txt", true);
+            utfil.WriteLine($"{title}|{description}|{url}");
+            utfil.Close();
+            Console.WriteLine($"Done adding new weblink");
+        }
+
         private static void WriteTheHelp()
         {
             string[] hstr = {
                 "help  - display this help",
-                "load  - load all links from a file",
+                "list  - list all links from a file",
+                "add  - add a link to a file",
                 "open  - open a specific link",
-                "quit  - quit the program"
+                "q  - quit the program"
             };
             foreach (string h in hstr) Console.WriteLine(h);
         }
