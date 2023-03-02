@@ -4,6 +4,9 @@
     {
         static void Main(string[] args)
         {
+
+            test!!
+
             PrintWelcome();
             string command;
             do
