@@ -44,7 +44,7 @@ namespace WebLinks
                 }
                 else if (command == "load")
                 {
-                    NotYetImplemented(command);
+                    loadNewWebLink();
                 }
                 else if (command == "open")
                 {
@@ -56,7 +56,15 @@ namespace WebLinks
                 }
             } while (command != "quit");
         }
-
+        private static void loadNewWebLink()
+        {
+            Console.Write($"enter title: ");
+            string title = Console.ReadLine();
+            Console.Write($"enter description: ");
+            string description = Console.ReadLine();
+            Console.Write($"enter URL: ");
+            string url = Console.ReadLine();
+        }
         private static void NotYetImplemented(string command)
         {
             Console.WriteLine($"Sorry: '{command}' is not yet implemented");
