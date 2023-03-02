@@ -4,7 +4,7 @@ namespace WebLinks
 {
     internal class Program
     {
-
+        private static WebLink[] webLinks;
         class WebLink
         {
             public string title;
@@ -17,12 +17,11 @@ namespace WebLinks
                 this.url = url;
                 this.description = description;
             }
-
         }
         static void Main(string[] args)
         {
             string[] lines = System.IO.File.ReadAllLines(@"links.txt");
-            WebLink[] webLinks = new WebLink[lines.Length];
+            webLinks = new WebLink[lines.Length];
             for (int i = 0; i<lines.Length; i++)
             {
                 string[] words = lines[i].Split('|');
