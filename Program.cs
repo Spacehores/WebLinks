@@ -1,10 +1,34 @@
-﻿namespace WebLinks
+﻿using static System.Net.Mime.MediaTypeNames;
+
+namespace WebLinks
 {
     internal class Program
     {
+
+        class WebLink
+        {
+            public string title;
+            public string url;
+            public string description;
+
+        public WebLink(string title, string description, string url)
+            {
+                this.title = title;
+                this.url = url;
+                this.description = description;
+            }
+
+        }
         static void Main(string[] args)
         {
-          
+            string[] lines = System.IO.File.ReadAllLines(@"links.txt");
+            WebLink[] webLinks = new WebLink[lines.Length];
+            for (int i = 0; i<lines.Length; i++)
+            {
+                string[] words = lines[i].Split('|');
+                webLinks[i] = new WebLink(words[0], words[1], words[2]);
+            }
+
             PrintWelcome();
             string command;
             do
