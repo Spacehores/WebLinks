@@ -4,6 +4,9 @@
     {
         static void Main(string[] args)
         {
+            /*
+             * NYTT TEST ######
+             * */
             PrintWelcome();
             string command;
             do
