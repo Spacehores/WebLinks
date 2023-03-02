@@ -4,12 +4,6 @@
     {
         static void Main(string[] args)
         {
-            /* 
-             * testetestestesttes
-             * 
-             * testestestset
-             * */
-            ¨//hallooo
             PrintWelcome();
             string command;
             do
