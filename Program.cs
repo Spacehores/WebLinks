@@ -15,17 +15,20 @@ namespace WebLinks
             public string title;
             public string url;
             public string description;
-        public WebLink(string title, string description, string url)
+
+
+            public WebLink(string title, string description, string url)
             {
                 this.title = title;
                 this.url = url;
                 this.description = description;
             }
+
             public void print()
             {
-                Console.WriteLine(title);
-                Console.WriteLine(url);
-                Console.WriteLine(description);
+                Console.WriteLine($"Title: {title}");
+                Console.WriteLine($"Url: {url}");
+                Console.WriteLine($"Description: {description}");
             }
         }
         static void Main(string[] args)
