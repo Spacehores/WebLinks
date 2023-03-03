@@ -93,7 +93,7 @@ namespace WebLinks
         }
 
         private static void ShowLinks()
-        {
+        { 
             string[] lines = System.IO.File.ReadAllLines(@"links.txt");
             foreach (string line in lines)
             {
