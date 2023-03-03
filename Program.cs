@@ -83,8 +83,9 @@ namespace WebLinks
             string url = Console.ReadLine();
             addWebLink(title, description, url);
             Console.WriteLine($"Done adding new weblink");
+            using StreamWriter sw = File.AppendText(@"links.txt");
+            sw.WriteLine(title + "|" + description + "|" + url);
         }
-
         private static void addWebLink(string title, string description, string url)
         {
             WebLink newWebLink = new WebLink(title, description, url);
@@ -96,13 +97,7 @@ namespace WebLinks
                 newList[i] = webLinks[i];
             }
             newList[newList.Length-1] = newWebLink;
-            webLinks = newList;
-            using (StreamWriter sw = File.AppendText(@"links.txt"))
-            {
-                sw.WriteLine(title);
-                sw.WriteLine(description);
-                sw.WriteLine(url);
-            }
+            webLinks = newList; 
         }
         public static void openLink()
         {
