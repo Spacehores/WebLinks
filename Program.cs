@@ -4,7 +4,6 @@ namespace WebLinks
 {
     internal class Program
     {
-        
         private static WebLink[] webLinks;
         class WebLink
         {
@@ -49,7 +48,7 @@ namespace WebLinks
                 }
                 else if (command == "open")
                 {
-                    ShowLinks();
+                    NotYetImplemented(command);
                 }
                 else
                 {
@@ -82,14 +81,9 @@ namespace WebLinks
             newList[newList.Length-1] = newWebLink;
         }
 
-        private static void ShowLinks()
+        private static void NotYetImplemented(string command)
         {
-            string[] lines = System.IO.File.ReadAllLines(@"links.txt");
-            foreach (string line in lines)
-            {
-                Console.WriteLine(line);
-                Console.WriteLine();
-            }
+            Console.WriteLine($"Sorry: '{command}' is not yet implemented");
         }
 
         private static void PrintWelcome()
