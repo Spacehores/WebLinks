@@ -13,7 +13,15 @@ namespace WebLinks
             public string title;
             public string url;
             public string description;
-            
+
+
+            public WebLink(string title, string description, string url)
+            {
+                this.title = title;
+                this.url = url;
+                this.description = description;
+            }
+
             public void print()
             {
                 Console.WriteLine($"Title: {title}");
