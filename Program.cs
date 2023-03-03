@@ -16,9 +16,9 @@ namespace WebLinks
             
             public void print()
             {
-                Console.WriteLine(title);
-                Console.WriteLine(url);
-                Console.WriteLine(description);
+                Console.WriteLine($"Title: {title}");
+                Console.WriteLine($"Url: {url}");
+                Console.WriteLine($"Description: {description}");
             }
         public WebLink(string title, string description, string url)
             {
