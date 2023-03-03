@@ -4,8 +4,7 @@ namespace WebLinks
 {
     internal class Program
     {
-        //test Rebe
-        //test Ari
+        
         private static WebLink[] webLinks;
         class WebLink
         {
