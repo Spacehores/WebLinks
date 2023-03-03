@@ -20,12 +20,6 @@ namespace WebLinks
                 Console.WriteLine($"Url: {url}");
                 Console.WriteLine($"Description: {description}");
             }
-        public WebLink(string title, string description, string url)
-            {
-                this.title = title;
-                this.url = url;
-                this.description = description;
-            }
         }
         static void Main(string[] args)
         {
