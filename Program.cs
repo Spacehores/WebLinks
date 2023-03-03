@@ -4,10 +4,6 @@ namespace WebLinks
 {
     internal class Program
     {
-        //test internal Gistav
-        /*
-         * 
-         * */
         private static WebLink[] webLinks;
         class WebLink
         {
