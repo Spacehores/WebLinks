@@ -49,7 +49,7 @@ namespace WebLinks
                 }
                 else if (command == "open")
                 {
-                    NotYetImplemented(command);
+                    ShowLinks();
                 }
                 else
                 {
@@ -82,9 +82,14 @@ namespace WebLinks
             newList[newList.Length-1] = newWebLink;
         }
 
-        private static void NotYetImplemented(string command)
+        private static void ShowLinks()
         {
-            Console.WriteLine($"Sorry: '{command}' is not yet implemented");
+            string[] lines = System.IO.File.ReadAllLines(@"links.txt");
+            foreach (string line in lines)
+            {
+                Console.WriteLine(line);
+                Console.WriteLine();
+            }
         }
 
         private static void PrintWelcome()
