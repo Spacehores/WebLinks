@@ -1,4 +1,6 @@
-﻿using static System.Net.Mime.MediaTypeNames;
+﻿using System;
+using System.Diagnostics;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WebLinks
 {
@@ -58,6 +60,10 @@ namespace WebLinks
                 {
                     ShowLinks();
                 }
+                else if (command == "open")
+                {
+                    openLink();
+                }
                 else
                 {
                     Console.WriteLine($"Unknown command '{command}'");
@@ -87,8 +93,34 @@ namespace WebLinks
                 newList[i] = webLinks[i];
             }
             newList[newList.Length-1] = newWebLink;
+            webLinks = newList;
         }
+        public static void openLink()
+        {
+            Console.Write("Enter title of link: ");
+            string readTitle = Console.ReadLine();
+            for (int i = 0; i <webLinks.Length; i++)
+            {
+                if (webLinks[i].title == readTitle)
+                {
+                    Process proc = new Process();
+                    proc.StartInfo.UseShellExecute = true;
+                    string url = webLinks[i].url;
+                    if (url.StartsWith("www"))
+                    {
+                        url = "https://" + url;
+                    }
+                    if (!url.StartsWith("https://"))
+                    {
+                        url = "https://www." + url;
+                    }
+                    Console.WriteLine("opening "+url);
+                    proc.StartInfo.FileName = url;
+                    proc.Start();
 
+                }
+            }
+        }
         private static void ShowLinks()
         {
             string[] lines = System.IO.File.ReadAllLines(@"links.txt");
