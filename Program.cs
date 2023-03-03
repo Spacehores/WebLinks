@@ -147,6 +147,7 @@ namespace WebLinks
                 "help  - display this help",
                 "load  - load all links from a file",
                 "open  - open a specific link",
+                "list  - lists all the links",
                 "quit  - quit the program"
             };
             foreach (string h in hstr) Console.WriteLine(h);
