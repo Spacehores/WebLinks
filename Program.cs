@@ -97,6 +97,12 @@ namespace WebLinks
             }
             newList[newList.Length-1] = newWebLink;
             webLinks = newList;
+            using (StreamWriter sw = File.AppendText(@"links.txt"))
+            {
+                sw.WriteLine(title);
+                sw.WriteLine(description);
+                sw.WriteLine(url);
+            }
         }
         public static void openLink()
         {
@@ -125,6 +131,7 @@ namespace WebLinks
                 }
             }
         }
+
         private static void ShowLinks()
         { 
             string[] lines = System.IO.File.ReadAllLines(@"links.txt");
