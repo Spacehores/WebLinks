@@ -49,7 +49,7 @@ namespace WebLinks
                 {
                     loadNewWebLink();
                 }
-                else if (command == "open")
+                else if (command == "list")
                 {
                     ShowLinks();
                 }
