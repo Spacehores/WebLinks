@@ -4,6 +4,7 @@ namespace WebLinks
 {
     internal class Program
     {
+        
         private static WebLink[] webLinks;
         class WebLink
         {
