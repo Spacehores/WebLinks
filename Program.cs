@@ -104,8 +104,9 @@ namespace WebLinks
             string readTitle = Console.ReadLine();
             for (int i = 0; i <webLinks.Length; i++)
             {
-                if (webLinks[i].title == readTitle)
+                if (string.Equals(webLinks[i].title, readTitle, StringComparison.OrdinalIgnoreCase))
                 {
+
                     Process proc = new Process();
                     proc.StartInfo.UseShellExecute = true;
                     string url = webLinks[i].url;
