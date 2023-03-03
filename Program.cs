@@ -7,7 +7,7 @@ namespace WebLinks
     internal class Program
     {
         /// <summary>
-        /// hej
+        /// <hej>
         /// </summary>
         private static WebLink[] webLinks;
         class WebLink
@@ -148,7 +148,7 @@ namespace WebLinks
         {
             string[] hstr = {
                 "help  - display this help",
-                "load  - load all links from a file",
+                "load  - load a new link file",
                 "open  - open a specific link",
                 "list  - lists all the links",
                 "quit  - quit the program"
